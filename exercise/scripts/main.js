@@ -18,30 +18,32 @@ window.addEventListener('DOMContentLoaded', function() {
         card.classList.add('is-selected');
       }
 
-      // If we have selected two cards, see if they match.
-      if (selectedCards.length === 2) {
-        var card1 = selectedCards[0];
-        var card2 = selectedCards[1];
 
-        // If the cards match, add them to the collection of matched cards and
-        // apply the correct CSS class.
-        if (card1.innerText === card2.innerText) {
-          matchedCards.push(card1, card2);
-          card1.classList.add('is-matched');
-          card2.classList.add('is-matched');
+        // If we have selected two cards, see if they match.
+        if (selectedCards.length === 2) {
+          var card1 = selectedCards[0];
+          var card2 = selectedCards[1];
+
+          // If the cards match, add them to the collection of matched cards and
+          // apply the correct CSS class.
+          if (card1.innerText === card2.innerText) {
+            matchedCards.push(card1, card2);
+            card1.classList.add('is-matched');
+            card2.classList.add('is-matched');
+          }
+          selectedCards = [];
+
+          // Regardless of whether or not the cards match, deselect them and reset
+          // the collection of matched cards.
+          window.setTimeout(function () {
+            card1.classList.remove('is-selected');
+            card2.classList.remove('is-selected');
+            if (matchedCards.length >= cards.length) {
+              alert('You matched all the cards, nice job!');
+            }
+          }, 300);
         }
-
-        // Regardless of whether or not the cards match, deselect them and reset
-        // the collection of matched cards.
-        card1.classList.remove('is-selected');
-        card2.classList.remove('is-selected');
-        selectedCards = [];
-      }
-
       // If we've matched all the cards, display a message.
-      if (matchedCards.length >= cards.length) {
-        alert('You matched all the cards, nice job!');
-      }
     });
   });
 
